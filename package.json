@@ -1,25 +1,35 @@
 {
   "name": "ele-data-list",
+  "description": "vue-ele-form 动态表单组件",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "core-js": "^3.3.2",
-    "vue": "^2.6.10"
+    "async-validator": "^3.2.0"
   },
+  "keywords": [
+    "vue-ele-form-dynamic",
+    "form-dynamic",
+    "element-ui-dynamic"
+  ],
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.0.0",
     "@vue/cli-plugin-eslint": "^4.0.0",
     "@vue/cli-service": "^4.0.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.3",
+    "core-js": "^3.3.2",
+    "element-ui": "2.11.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "lint-staged": "^9.4.2",
+    "vue": "^2.6.10",
+    "vue-ele-form": "^0.6.7",
     "vue-template-compiler": "^2.6.10"
   },
   "gitHooks": {
