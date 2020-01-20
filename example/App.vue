@@ -21,6 +21,7 @@ export default {
   data () {
     return {
       formData: {
+        color: ['red', 'blue']
       },
       formDesc: {
         goods: {

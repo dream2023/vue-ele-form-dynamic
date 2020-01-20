@@ -218,6 +218,11 @@ attrs: {
   delimiter: {
     type: String,
     default: '-'
+  },
+  // 是否过滤空
+  isFilterEmpty: {
+    type: Boolean,
+    default: true
   }
 }
 ```

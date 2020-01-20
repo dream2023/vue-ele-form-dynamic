@@ -1,7 +1,7 @@
 <template>
   <div class="ele-form-dynamic">
     <div
-      v-for="(dataItem, i) of value"
+      v-for="(dataItem, i) of list"
       :key="i"
       class="ele-form-dynamic-section"
     >
@@ -17,7 +17,7 @@
             :is="item.type || 'el-input'"
             :key="index"
             @input="validateOneValue($event, i)"
-            v-model="value[i]"
+            v-model="list[i]"
             :style="item.style"
             v-bind="getAttrs(item.attrs)"
             :class="item.class"
@@ -57,7 +57,7 @@
           >
             <component
               :is="item.type || 'el-input'"
-              v-model="value[i][item.valueKey]"
+              v-model="list[i][item.valueKey]"
               :style="item.style"
               v-bind="getAttrs(item.attrs)"
               @input="validateOneValue($event, i, item.valueKey)"
@@ -88,14 +88,14 @@
       <template v-if="!disabled">
         <!-- 当只有1条时, 不显示删除 -->
         <i
-          v-if="value.length !== 1"
+          v-if="list.length !== 1"
           @click="removeRow(i)"
           class="ele-form-dynamic-icon el-icon-remove-outline"
         ></i>
         <!-- 仅在最后一条显示添加 -->
         <i
           @click="addRow"
-          v-if="i === value.length - 1"
+          v-if="i === list.length - 1"
           class="ele-form-dynamic-icon el-icon-circle-plus-outline"
         ></i>
       </template>
@@ -149,6 +149,24 @@ export default {
     delimiter: {
       type: String,
       default: '-'
+    },
+    // 是否过滤空
+    isFilterEmpty: {
+      type: Boolean,
+      default: true
+    }
+  },
+  data () {
+    return {
+      // value的拷贝, 因为需要过滤空值
+      list: []
+    }
+  },
+  watch: {
+    list (list) {
+      // 过滤掉空值(空字符串 / 空对象)
+      const data = this.isFilterEmpty ? list.filter(item => this.computedColumns.length === 1 ? item !== '' : JSON.stringify(item) !== '{}') : list
+      this.$emit('input', data)
     }
   },
   computed: {
@@ -164,22 +182,22 @@ export default {
     },
     // 移除一行
     removeRow (index) {
-      this.value.splice(index, 1)
+      this.list.splice(index, 1)
     },
     // 新增一行
     addRow () {
       // 单列和多列数据不一样
       // 单列是数组 [a1, a2], 多列是对象 [{name: xx, age: xx}], 所以默认值不相同
-      const column = this.computedColumns.length === 1 ? null : {}
-      this.value.push(column)
-      this.$emit('input', this.value)
-      return this.value
+      const column = this.computedColumns.length === 1 ? '' : {}
+      this.list.push(column)
     }
   },
   mounted () {
     // 当没有数据时,新增一行
     if (!this.disabled && (!this.value || this.value.length === 0)) {
-      this.addRow(this.value)
+      this.addRow(this.list)
+    } else {
+      this.list = this.value
     }
   }
 }
