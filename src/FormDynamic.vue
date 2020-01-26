@@ -132,7 +132,6 @@ export default {
     // 列
     columns: {
       type: [Object, Array],
-      required: true,
       validator (columns) {
         if (Array.isArray(columns)) {
           const isError = columns.some((item) => !item.valueKey)
@@ -154,6 +153,10 @@ export default {
     isFilterEmpty: {
       type: Boolean,
       default: true
+    },
+    // 占位符
+    placeholder: {
+      type: String
     }
   },
   data () {
@@ -172,13 +175,22 @@ export default {
   computed: {
     // 无论是单列还是多列, 统一转为数组
     computedColumns () {
-      return Array.isArray(this.columns) ? this.columns : [this.columns]
+      if (this.columns) {
+        return Array.isArray(this.columns) ? this.columns : [this.columns]
+      } else {
+        return [{
+          type: 'el-input',
+          attrs: {
+            placeholder: this.placeholder
+          }
+        }]
+      }
     }
   },
   methods: {
     // 获取属性 (为了将disabled统一设置)
     getAttrs (attrs = {}) {
-      return Object.assign(attrs, { disabled: this.disabled })
+      return Object.assign(attrs, { disabled: this.disabled, placeholder: attrs.placeholder || this.placeholder })
     },
     // 移除一行
     removeRow (index) {

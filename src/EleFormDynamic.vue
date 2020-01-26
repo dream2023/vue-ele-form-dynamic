@@ -19,6 +19,13 @@ export default {
   components: {
     FormDynamic
   },
+  computed: {
+    defaultAttrs () {
+      return {
+        placeholder: this.t('ele-form.input') + this.desc.label
+      }
+    }
+  },
   methods: {
     validate () {
       return new Promise((resolve, reject) => {

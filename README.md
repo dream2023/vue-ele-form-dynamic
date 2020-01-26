@@ -202,11 +202,11 @@ attrs: {
   // 列
   columns: {
     type: [Object, Array],
-    required: true,
     validator (columns) {
       if (Array.isArray(columns)) {
         const isError = columns.some((item) => !item.valueKey)
         if (isError) {
+          // eslint-disable-next-line
           console.error('[ele-form-dynamic warn]: columns当为数组时, 必须包含valueKey属性')
           return false
         }
@@ -223,6 +223,10 @@ attrs: {
   isFilterEmpty: {
     type: Boolean,
     default: true
+  },
+  // 占位符
+  placeholder: {
+    type: String
   }
 }
 ```
