@@ -11,7 +11,7 @@
 
 <script>
 import FormDynamic from './FormDynamic'
-import formMixin from 'vue-ele-form/lib/mixins/formMixin'
+import { formMixin } from 'vue-ele-form'
 
 export default {
   name: 'EleFormDynamic',

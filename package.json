@@ -1,17 +1,20 @@
 {
   "name": "vue-ele-form-dynamic",
   "description": "vue-ele-form 动态表单组件",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": false,
   "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "build:lib": "vue-cli-service build --target lib --name vue-ele-form-dynamic --dest ./dist/ ./src/index.js",
+    "lint": "vue-cli-service lint --mode=production"
   },
   "main": "src/index.js",
+  "browser": "dist/vue-ele-form-dynamic.umd.min.js",
   "dependencies": {
-    "async-validator": "^3.2.0"
+    "async-validator": "^3.2.0",
+    "fast-deep-equal": "^3.1.1"
   },
   "keywords": [
     "vue-ele-form-dynamic",
@@ -30,7 +33,7 @@
     "eslint-plugin-vue": "^5.0.0",
     "lint-staged": "^9.4.2",
     "vue": "^2.6.10",
-    "vue-ele-form": "^0.6.7",
+    "vue-ele-form": "^0.8.11",
     "vue-template-compiler": "^2.6.10"
   },
   "gitHooks": {

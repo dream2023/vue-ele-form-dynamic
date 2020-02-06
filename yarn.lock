@@ -2222,11 +2222,6 @@ combined-stream@^1.0.6, combined-stream@~1.0.6:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@*:
-  version "3.0.2"
-  resolved "https://registry.npm.taobao.org/commander/download/commander-3.0.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcommander%2Fdownload%2Fcommander-3.0.2.tgz#6837c3fb677ad9933d1cfba42dd14d5117d6b39e"
-  integrity sha1-aDfD+2d62ZM9HPukLdFNURfWs54=
-
 commander@2.17.x:
   version "2.17.1"
   resolved "https://registry.npm.taobao.org/commander/download/commander-2.17.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcommander%2Fdownload%2Fcommander-2.17.1.tgz#bd77ab7de6de94205ceacc72f1716d29f20a77bf"
@@ -2380,7 +2375,7 @@ copy-webpack-plugin@^5.0.3:
     normalize-path "^3.0.0"
     p-limit "^2.2.0"
     schema-utils "^1.0.0"
-    serialize-javascript "^2.2.0"
+    serialize-javascript "^1.7.0"
     webpack-log "^2.0.0"
 
 core-js-compat@^3.1.1, core-js-compat@^3.3.2:
@@ -3559,6 +3554,11 @@ fast-deep-equal@^2.0.1:
   version "2.0.1"
   resolved "https://registry.npm.taobao.org/fast-deep-equal/download/fast-deep-equal-2.0.1.tgz#7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49"
   integrity sha1-ewUhjd+WZ79/Nwv3/bLLFf3Qqkk=
+
+fast-deep-equal@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.npm.taobao.org/fast-deep-equal/download/fast-deep-equal-3.1.1.tgz?cache=0&sync_timestamp=1575383774695&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ffast-deep-equal%2Fdownload%2Ffast-deep-equal-3.1.1.tgz#545145077c501491e33b15ec408c294376e94ae4"
+  integrity sha1-VFFFB3xQFJHjOxXsQIwpQ3bpSuQ=
 
 fast-glob@^2.2.6:
   version "2.2.7"
@@ -5541,13 +5541,6 @@ mkdirp@0.5.1, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.1:
   dependencies:
     minimist "0.0.8"
 
-mockjs@^1.0.1-beta3:
-  version "1.1.0"
-  resolved "https://registry.npm.taobao.org/mockjs/download/mockjs-1.1.0.tgz#e6a0c378e91906dbaff20911cc0273b3c7d75b06"
-  integrity sha1-5qDDeOkZBtuv8gkRzAJzs8fXWwY=
-  dependencies:
-    commander "*"
-
 move-concurrently@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npm.taobao.org/move-concurrently/download/move-concurrently-1.0.1.tgz#be2c005fda32e0b29af1f05d7c4b33214c701f92"
@@ -7379,6 +7372,16 @@ send@0.17.1:
     range-parser "~1.2.1"
     statuses "~1.5.0"
 
+serialize-javascript@^1.7.0:
+  version "1.9.1"
+  resolved "https://registry.npm.taobao.org/serialize-javascript/download/serialize-javascript-1.9.1.tgz#cfc200aef77b600c47da9bb8149c943e798c2fdb"
+  integrity sha1-z8IArvd7YAxH2pu4FJyUPnmML9s=
+
+serialize-javascript@^2.1.0:
+  version "2.1.2"
+  resolved "https://registry.npm.taobao.org/serialize-javascript/download/serialize-javascript-2.1.2.tgz#ecec53b0e0317bdc95ef76ab7074b7384785fa61"
+  integrity sha1-7OxTsOAxe9yV73arcHS3OEeF+mE=
+
 serve-index@^1.9.1:
   version "1.9.1"
   resolved "https://registry.npm.taobao.org/serve-index/download/serve-index-1.9.1.tgz#d3768d69b1e7d82e5ce050fff5b453bea12a9239"
@@ -7990,7 +7993,7 @@ terser-webpack-plugin@^1.4.1:
     find-cache-dir "^2.1.0"
     is-wsl "^1.1.0"
     schema-utils "^1.0.0"
-    serialize-javascript "^2.2.0"
+    serialize-javascript "^1.7.0"
     source-map "^0.6.1"
     terser "^4.1.2"
     webpack-sources "^1.4.0"
@@ -8005,7 +8008,7 @@ terser-webpack-plugin@^2.1.2:
     find-cache-dir "^3.0.0"
     jest-worker "^24.9.0"
     schema-utils "^2.5.0"
-    serialize-javascript "^2.2.0"
+    serialize-javascript "^2.1.0"
     source-map "^0.6.1"
     terser "^4.3.9"
     webpack-sources "^1.4.3"
@@ -8428,14 +8431,14 @@ vm-browserify@^1.0.1:
   resolved "https://registry.npm.taobao.org/vm-browserify/download/vm-browserify-1.1.0.tgz#bd76d6a23323e2ca8ffa12028dc04559c75f9019"
   integrity sha1-vXbWojMj4sqP+hICjcBFWcdfkBk=
 
-vue-ele-form@^0.6.7:
-  version "0.6.7"
-  resolved "https://registry.npm.taobao.org/vue-ele-form/download/vue-ele-form-0.6.7.tgz#ee1c619a1c5ab8694693e766154dd861967009b3"
-  integrity sha1-7hxhmhxauGlGk+dmFU3YYZZwCbM=
+vue-ele-form@^0.8.11:
+  version "0.8.11"
+  resolved "https://registry.npm.taobao.org/vue-ele-form/download/vue-ele-form-0.8.11.tgz#e7e90f8ac3ff7fbd208353f0ac58c36c20286a12"
+  integrity sha1-5+kPisP/f70gg1PwrFjDbCAoahI=
   dependencies:
     dayjs "^1.8.15"
+    is-number "^7.0.0"
     lodash.clonedeep "^4.5.0"
-    mockjs "^1.0.1-beta3"
     throttle-debounce "^2.1.0"
 
 vue-eslint-parser@^5.0.0:

@@ -18,6 +18,7 @@
             :key="index"
             @input="validateOneValue($event, i)"
             v-model="list[i]"
+            @change="emitVal"
             :style="item.style"
             v-bind="getAttrs(item.attrs)"
             :class="item.class"
@@ -59,6 +60,7 @@
               :is="item.type || 'el-input'"
               v-model="list[i][item.valueKey]"
               :style="item.style"
+              @change="emitVal"
               v-bind="getAttrs(item.attrs)"
               @input="validateOneValue($event, i, item.valueKey)"
               :class="item.class"
@@ -88,7 +90,7 @@
       <template v-if="!disabled">
         <!-- 当只有1条时, 不显示删除 -->
         <i
-          v-if="list.length !== 1"
+          v-if="isShowDelete"
           @click="removeRow(i)"
           class="ele-form-dynamic-icon el-icon-remove-outline"
         ></i>
@@ -108,6 +110,7 @@
 // 单列基本类型数组, 多列是对象数组
 import validate from './validate'
 import ExtendSlot from 'vue-ele-form/lib/ExtendSlot'
+const equal = require('fast-deep-equal')
 
 export default {
   name: 'FormDynamic',
@@ -166,13 +169,31 @@ export default {
     }
   },
   watch: {
-    list (list) {
-      // 过滤掉空值(空字符串 / 空对象)
-      const data = this.isFilterEmpty ? list.filter(item => this.computedColumns.length === 1 ? item !== '' : JSON.stringify(item) !== '{}') : list
-      this.$emit('input', data)
+    value: {
+      handler (value) {
+        const filterVal = this.filterList(value)
+        if (!equal(this.filteredList, filterVal)) {
+          this.list = JSON.parse(JSON.stringify(value))
+        }
+        if (!this.disabled && !this.list.length) {
+          this.addRow()
+        }
+      },
+      immediate: true
     }
   },
   computed: {
+    isShowDelete () {
+      const isEmpty = (val) => {
+        switch (typeof val) {
+          case 'string':
+            return val === ''
+          case 'object':
+            return JSON.stringify(val) === '{}'
+        }
+      }
+      return this.list.length > 1 || !isEmpty(this.list[0])
+    },
     // 无论是单列还是多列, 统一转为数组
     computedColumns () {
       if (this.columns) {
@@ -185,9 +206,17 @@ export default {
           }
         }]
       }
+    },
+    // 过滤后的列表
+    filteredList () {
+      const list = this.list
+      return this.filterList(list)
     }
   },
   methods: {
+    filterList (list) {
+      return this.isFilterEmpty ? list.filter(item => this.computedColumns.length === 1 ? item !== '' : JSON.stringify(item) !== '{}') : list
+    },
     // 获取属性 (为了将disabled统一设置)
     getAttrs (attrs = {}) {
       return Object.assign(attrs, { disabled: this.disabled, placeholder: attrs.placeholder || this.placeholder })
@@ -195,6 +224,11 @@ export default {
     // 移除一行
     removeRow (index) {
       this.list.splice(index, 1)
+      this.emitVal()
+    },
+    // 抛出改变
+    emitVal () {
+      this.$emit('input', this.filteredList)
     },
     // 新增一行
     addRow () {
@@ -202,14 +236,6 @@ export default {
       // 单列是数组 [a1, a2], 多列是对象 [{name: xx, age: xx}], 所以默认值不相同
       const column = this.computedColumns.length === 1 ? '' : {}
       this.list.push(column)
-    }
-  },
-  mounted () {
-    // 当没有数据时,新增一行
-    if (!this.disabled && (!this.value || this.value.length === 0)) {
-      this.addRow(this.list)
-    } else {
-      this.list = this.value
     }
   }
 }
