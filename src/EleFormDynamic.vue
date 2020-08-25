@@ -11,7 +11,7 @@
 
 <script>
 import FormDynamic from './FormDynamic'
-import { formMixin } from 'vue-ele-form'
+import formMixin from 'vue-ele-form/lib/mixins/formMixin'
 
 export default {
   name: 'EleFormDynamic',
@@ -20,19 +20,22 @@ export default {
     FormDynamic
   },
   computed: {
-    defaultAttrs () {
+    defaultAttrs() {
       return {
         placeholder: this.t('ele-form.input') + this.desc.label
       }
     }
   },
   methods: {
-    validate () {
+    validate() {
       return new Promise((resolve, reject) => {
-        this.$refs['form-dynamic'].validate().then(resolve).catch(() => {
-          // eslint-disable-next-line prefer-promise-reject-errors
-          reject({ [this.$parent.$props.prop]: '出错了' })
-        })
+        this.$refs['form-dynamic']
+          .validate()
+          .then(resolve)
+          .catch(() => {
+            // eslint-disable-next-line prefer-promise-reject-errors
+            reject({ [this.$parent.$props.prop]: '出错了' })
+          })
       })
     }
   }
